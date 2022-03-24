@@ -40,7 +40,7 @@ class _LoginState extends State<Login> {
                 child: TextField(
                   textAlign: TextAlign.left,
                   style: const TextStyle(fontSize: 18),
-                  autofocus: true,
+                  autofocus: false,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -68,7 +68,7 @@ class _LoginState extends State<Login> {
                   obscureText: _isObscure,
                   textAlign: TextAlign.left,
                   style: const TextStyle(fontSize: 18),
-                  autofocus: true,
+                  autofocus: false,
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
                       icon: Icon(
