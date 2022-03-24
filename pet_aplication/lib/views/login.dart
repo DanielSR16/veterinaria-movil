@@ -109,10 +109,11 @@ class _LoginState extends State<Login> {
                         );
                       } else {
                         login(user!, pass!).then((value) {
-                          if (value != 'No hay') {
-                            provider.saveData(datos: value);
+                          if (value.length > 1) {
+                            provider.saveData(
+                                token: value[1], idUser: value[0]);
                             Navigator.pushReplacementNamed(context, 'home');
-                          } else if (value == 'No hay') {
+                          } else {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
                               duration: Duration(milliseconds: 1000),

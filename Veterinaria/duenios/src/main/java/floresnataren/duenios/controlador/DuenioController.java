@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import floresnataren.duenios.repositorio.DuenioRepository;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -100,13 +101,16 @@ public class DuenioController {
     }
 
     @PostMapping(value = "/user/login")
-    public String login(@RequestBody UsuarioCredentials credentials){
+    public List login(@RequestBody UsuarioCredentials credentials){
+        List data = new ArrayList();
         User usuario = userRepositorio.findByUsernameAndPassword(credentials.getUsername(), credentials.getPassword());
         System.out.println(usuario);
-        if (usuario != null)
-            return getJWTToken(usuario.getUsername());
-        else
-            return "No hay";
+        if (usuario != null) {
+            data.add(usuario.getId());
+            data.add(getJWTToken(usuario.getUsername()));
+           return data;
+        }else
+            return null;
 
     }
 

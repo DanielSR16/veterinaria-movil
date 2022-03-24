@@ -2,10 +2,17 @@ import 'package:flutter/material.dart';
 
 class LoginProvider extends ChangeNotifier {
   String jwt = "";
+  int id = 0;
+  void saveData({required String token, required int idUser}) {
+    jwt = token;
+    id = idUser;
 
-  void saveData({required String datos}) {
-    jwt = datos;
-    print(jwt);
     notifyListeners();
+
+    Future.delayed(const Duration(milliseconds: 5000), () {
+      jwt = '';
+      id = 0;
+      notifyListeners();
+    });
   }
 }
