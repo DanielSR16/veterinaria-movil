@@ -21,7 +21,7 @@ export default function MenuPrincipalMA() {
     const obtenerMascotas = async () => {
         const dato = await fetch('http://localhost:9998/listMascotas');
         const mascotaA = await dato.json();
-        setMascotas(mascotaA);
+        // setMascotas(mascotaA);
        
     }
     return (

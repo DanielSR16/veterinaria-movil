@@ -28,10 +28,10 @@ public class DuenioController {
     @Autowired
     RestTemplate restTemplate;
 
-    @GetMapping(value = "/listDuenios")
-    public List<Duenio> getListduenio(){
-        return duenioRepository.findAll();
-    }
+//    @GetMapping(value = "/listDuenios")
+//    public List<Duenio> getListduenio(){
+//        return duenioRepository.findAll();
+//    }
 
     @GetMapping(value = "/duenioConMascotas/{idDuenio}")
     public DuenioMascota getDuenioConMascotas(@PathVariable("idDuenio") int idDuenio){
@@ -125,6 +125,12 @@ public class DuenioController {
         }
 
 
+    }
+
+    @GetMapping(value = "/user/listUser")
+    public List<User> getListduenio(){
+        
+        return  userRepositorio.findAll();
     }
 
 

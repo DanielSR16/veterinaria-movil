@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pet_aplication/providers/loginProvider.dart';
+import 'package:pet_aplication/providers/share.dart';
 import 'package:pet_aplication/services/loginService.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -11,6 +13,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   bool _isObscure = true;
   String? user = '';
   String? pass = '';
@@ -110,9 +114,10 @@ class _LoginState extends State<Login> {
                       } else {
                         login(user!, pass!).then((value) {
                           if (value.length > 1) {
-                            provider.saveData(
-                                token: value[1], idUser: value[0]);
-                            Navigator.pushReplacementNamed(context, 'home');
+                            // provider.saveData(
+                            //     token: value[1], idUser: value[0]);
+                            local().setToken(value[1]);
+                            Navigator.pushReplacementNamed(context, 'duenios');
                           } else {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(

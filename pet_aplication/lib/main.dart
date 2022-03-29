@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_aplication/views/duenios.dart';
 import 'package:pet_aplication/views/home.dart';
 import 'package:pet_aplication/views/login.dart';
 import 'package:provider/provider.dart';
@@ -28,10 +29,11 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        initialRoute: 'login',
+        initialRoute: 'duenios',
         routes: {
           'login': (_) => const Login(),
           'home': (_) => Home(),
+          'duenios': (_) => const duenios(),
         },
       ),
     );

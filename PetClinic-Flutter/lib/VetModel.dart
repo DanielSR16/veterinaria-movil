@@ -7,7 +7,7 @@ class VetList {
 
   factory VetList.fromJson(Map<String, dynamic> parsedJson) {
 
-    Iterable list = parsedJson['vetList'];
+    Iterable list = parsedJson['user'];
 
     List<Vet> vets = list.map((i) =>
         Vet.fromJson(i)).toList();

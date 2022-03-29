@@ -9,10 +9,10 @@ class LoginProvider extends ChangeNotifier {
 
     notifyListeners();
 
-    Future.delayed(const Duration(milliseconds: 5000), () {
-      jwt = '';
-      id = 0;
-      notifyListeners();
-    });
+    // Future.delayed(const Duration(milliseconds: 10000), () {
+    //   jwt = '';
+    //   id = 0;
+    //   notifyListeners();
+    // });
   }
 }
