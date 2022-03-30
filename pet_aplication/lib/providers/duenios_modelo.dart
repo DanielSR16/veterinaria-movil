@@ -18,7 +18,7 @@ class Usuario {
   final int id;
   final String nombre;
   final String apellidos;
-  final String edad;
+  final int edad;
   final String rol;
   final String username;
   final String password;
@@ -37,9 +37,9 @@ class Usuario {
         id: json['id'],
         nombre: json['nombre'],
         apellidos: json['apellidos'],
-        edad: json['id'],
-        rol: json['nombre'],
-        username: json['apellidos'],
-        password: json['id'],
+        edad: json['edad'],
+        rol: json['rol'],
+        username: json['username'],
+        password: json['password'],
       );
 }

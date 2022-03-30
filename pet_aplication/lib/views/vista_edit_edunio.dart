@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pet_aplication/providers/duenios_modelo.dart';
 import 'package:pet_aplication/providers/share.dart';
 import 'package:pet_aplication/views/duenios.dart';
+import 'package:pet_aplication/services/loginService.dart';
 
 class edit_duenio extends StatefulWidget {
   // final Usuario user;
@@ -55,7 +56,7 @@ class _edit_duenioState extends State<edit_duenio> {
   Widget build(BuildContext context) {
     double width_total = MediaQuery.of(context).size.width;
     double height_total = MediaQuery.of(context).size.height;
-    final usuario = ModalRoute.of(context)!.settings.arguments;
+    final Object? lista_navigator = ModalRoute.of(context)!.settings.arguments;
     iniciar = true;
     print('object');
     print(datos_duenio);
@@ -93,8 +94,27 @@ class _edit_duenioState extends State<edit_duenio> {
                         ),
                       ),
                       onPressed: () {
-                        print(nombre.text + apellidos.text);
-                        Navigator.pushReplacementNamed(context, 'duenios');
+                        // print(nombre.text + apellidos.text);
+                        // print(lista_navigator.toString()[0]);
+                        String id_STR = lista_navigator.toString()[1];
+                        int id_casteado =
+                            int.parse(lista_navigator.toString()[1]);
+
+                        Usuario user = new Usuario(
+                            id: id_casteado,
+                            nombre: nombre.text,
+                            apellidos: apellidos.text,
+                            edad: int.parse(edad.text),
+                            rol: 'Cliente',
+                            username: usuario_controller.text,
+                            password: contrasenia.text);
+                        print(user);
+                        local().getToken().then((token) {
+                          updateDuenio(user, token!).then((value) {
+                            print(value);
+                            Navigator.pushReplacementNamed(context, 'duenios');
+                          });
+                        });
                       },
                       child: const Text('Editar Usuario'),
                     ),

@@ -66,8 +66,6 @@ class _dueniosState extends State<duenios> {
     return null;
   }
 
-
-
   //https://www.kindacode.com/article/flutter-listtile/
   Widget listaDatos(int lenghtLista, List lista, BuildContext context) {
     final List<Map<String, dynamic>> _items = List.generate(
@@ -105,9 +103,14 @@ class _dueniosState extends State<duenios> {
                   lista_Datos.add(lista[index]['edad'].toString());
                   lista_Datos.add(lista[index]['nombre']);
                   lista_Datos.add(lista[index]['apellidos']);
+
                   print(lista_datos);
+                  late List ListaNavigador = [];
+                  ListaNavigador.add(lista[index]['id'].toString());
+                  ListaNavigador.add(lista[index]['rol']);
                   local().setDuenio(lista_Datos);
-                  Navigator.pushReplacementNamed(context, 'edit_duenios');
+                  Navigator.pushReplacementNamed(context, 'edit_duenios',
+                      arguments: ListaNavigador);
                 },
                 icon: const Icon(Icons.edit),
               ),

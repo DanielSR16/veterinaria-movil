@@ -48,12 +48,23 @@ Future<List<dynamic>> get_duenios_all(String token) async {
   }
 }
 
-Future<List<dynamic>> updateDuenio(Usuario usuario) async {
+Future<List<dynamic>> updateDuenio(Usuario usuario, String token) async {
   try {
     final response = await http.post(
-      Uri.http('192.168.1.71:18080', '/user/login'),
-      headers: {'Content-Type': 'application/json; charset=UTF-8'},
-      body: json.encode(usuario),
+      Uri.http('192.168.1.71:18080', '/user/update'),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        HttpHeaders.authorizationHeader: token
+      },
+      body: json.encode({
+        "id": usuario.id,
+        "username": usuario.username,
+        "password": usuario.password,
+        "rol": usuario.rol,
+        "edad": usuario.edad,
+        "nombre": usuario.nombre,
+        "apellidos": usuario.apellidos
+      }),
     );
 
     if (response.statusCode == 200) {

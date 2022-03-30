@@ -105,7 +105,7 @@ public class DuenioController {
     public List login(@RequestBody UsuarioCredentials credentials){
         List data = new ArrayList();
         User usuario = userRepositorio.findByUsernameAndPassword(credentials.getUsername(), credentials.getPassword());
-        System.out.println(usuario);
+//        System.out.println(usuario);
         if (usuario != null) {
             data.add(usuario.getId());
             data.add(getJWTToken(usuario.getUsername()));
@@ -140,7 +140,7 @@ public class DuenioController {
         if(userRepositorio.findById(usuario.getId()) != null){
             return userRepositorio.save(usuario);
         }
-        return null;
+        return usuario;
     }
 
 
