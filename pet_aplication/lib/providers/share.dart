@@ -10,4 +10,14 @@ class local {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('jwt');
   }
+
+  Future<Future<bool>> setDuenio(List<String> lista) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setStringList('listaDuenio', lista);
+  }
+
+  Future<List<String>?> getDuenio() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getStringList('listaDuenio');
+  }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pet_aplication/views/duenios.dart';
 import 'package:pet_aplication/views/home.dart';
 import 'package:pet_aplication/views/login.dart';
+import 'package:pet_aplication/views/vista_edit_edunio.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/loginProvider.dart';
@@ -29,11 +30,12 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        initialRoute: 'duenios',
+        initialRoute: 'login',
         routes: {
           'login': (_) => const Login(),
           'home': (_) => Home(),
           'duenios': (_) => const duenios(),
+          'edit_duenios': (_) => const edit_duenio(),
         },
       ),
     );

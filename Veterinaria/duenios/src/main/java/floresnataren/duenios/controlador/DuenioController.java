@@ -35,7 +35,7 @@ public class DuenioController {
 
     @GetMapping(value = "/duenioConMascotas/{idDuenio}")
     public DuenioMascota getDuenioConMascotas(@PathVariable("idDuenio") int idDuenio){
-        Duenio duenio =  duenioRepository.findByIdDuenio(idDuenio);
+        Duenio duenio =  duenioRepository.findById(idDuenio);
         DuenioMascota duenioMascota= null;
         if (duenio != null){
             duenioMascota = new DuenioMascota(duenio.getIdDuenio(), duenio.getNombre(), duenio.getTelefono(), duenio.getDireccion());
@@ -50,7 +50,7 @@ public class DuenioController {
     }
     @GetMapping(value="/duenio/{idDuenio}")
     public Duenio getDuenio(@PathVariable("idDuenio") int idDuenio){
-        return duenioRepository.findByIdDuenio(idDuenio);
+        return duenioRepository.findById(idDuenio);
     }
 
     @PostMapping(value = "/duenio/telefono")
@@ -64,14 +64,15 @@ public class DuenioController {
 
     @PostMapping(value = "/duenio/update")
     public Duenio updateDuenio(@RequestBody Duenio duenio){
-        if(duenioRepository.findByIdDuenio(duenio.getIdDuenio()) != null){
+        if(duenioRepository.findById(duenio.getIdDuenio()) != null){
             return duenioRepository.save(duenio);
         }
         return null;
     }
+
     @PostMapping(value = "/duenio/delete")
     public Boolean deleteDuenio(@RequestBody Duenio duenio){
-        Duenio d = duenioRepository.findByIdDuenio(duenio.getIdDuenio());
+        Duenio d = duenioRepository.findById(duenio.getIdDuenio());
         if(d != null){
             duenioRepository.delete(d);
             return true;
@@ -133,6 +134,14 @@ public class DuenioController {
         return  userRepositorio.findAll();
     }
 
+
+    @PostMapping(value = "/user/update")
+    public User updateUser(@RequestBody User usuario){
+        if(userRepositorio.findById(usuario.getId()) != null){
+            return userRepositorio.save(usuario);
+        }
+        return null;
+    }
 
 
 

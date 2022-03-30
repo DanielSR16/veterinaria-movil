@@ -8,6 +8,7 @@ public class Duenio {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int idDuenio;
+
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "telefono")

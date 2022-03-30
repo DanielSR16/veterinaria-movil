@@ -12,6 +12,7 @@ class duenios extends StatefulWidget {
 class _dueniosState extends State<duenios> {
   @override
   TextEditingController _textFieldController = TextEditingController();
+  late List<String> lista_Datos = [];
   var refreshKey = GlobalKey<RefreshIndicatorState>();
   int tamLista = 0;
   List lista_datos = [];
@@ -47,7 +48,7 @@ class _dueniosState extends State<duenios> {
 
   Future<Null> refreshList() async {
     refreshKey.currentState?.show();
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 1));
     setState(
       () {
         local().getToken().then(
@@ -62,58 +63,10 @@ class _dueniosState extends State<duenios> {
             );
       },
     );
-
     return null;
   }
 
-  Future<void> _displayTextInputDialog(BuildContext context) async {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return Container(
-          height: 100,
-          child: AlertDialog(
-            title: Text('TextField in Dialog'),
-            content: Column(
 
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  onChanged: (value) {},
-                  controller: _textFieldController,
-                  decoration: InputDecoration(hintText: "Text Field in Dialog"),
-                ),
-                TextField(
-                  onChanged: (value) {},
-                  controller: _textFieldController,
-                  decoration: InputDecoration(hintText: "Text Field in Dialog"),
-                ),
-                TextField(
-                  onChanged: (value) {},
-                  controller: _textFieldController,
-                  decoration: InputDecoration(hintText: "Text Field in Dialog"),
-                ),
-               
-              ],
-            ),
-            actions: <Widget>[
-              TextButton(
-                //  color: Colors.green,
-                //  textColor: Colors.white,
-                child: Text('OK'),
-                onPressed: () {
-                  setState(() {
-                    //  codeDialog = valueText;
-                    Navigator.pop(context);
-                  });
-                },
-              )
-            ],
-          ),
-        );
-      },
-    );
-  }
 
   //https://www.kindacode.com/article/flutter-listtile/
   Widget listaDatos(int lenghtLista, List lista, BuildContext context) {
@@ -144,7 +97,17 @@ class _dueniosState extends State<duenios> {
             children: [
               IconButton(
                 onPressed: () {
-                  _displayTextInputDialog(context);
+                  print(lista[index]);
+
+                  lista_Datos.add(lista[index]['id'].toString());
+                  lista_Datos.add(lista[index]['username']);
+                  lista_Datos.add(lista[index]['password']);
+                  lista_Datos.add(lista[index]['edad'].toString());
+                  lista_Datos.add(lista[index]['nombre']);
+                  lista_Datos.add(lista[index]['apellidos']);
+                  print(lista_datos);
+                  local().setDuenio(lista_Datos);
+                  Navigator.pushReplacementNamed(context, 'edit_duenios');
                 },
                 icon: const Icon(Icons.edit),
               ),

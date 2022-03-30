@@ -7,10 +7,9 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface UserRepositorio extends CrudRepository<User, Integer>{
-
     User findByUsernameAndPassword(String username, String password);
-
     User save(User user);
+    User findById(int id);
     List<User> findAll();
 }
 
