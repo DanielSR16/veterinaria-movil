@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_aplication/providers/duenios_modelo.dart';
 import 'package:pet_aplication/providers/share.dart';
 import 'package:pet_aplication/services/loginService.dart';
 
@@ -95,8 +96,6 @@ class _dueniosState extends State<duenios> {
             children: [
               IconButton(
                 onPressed: () {
-                  print(lista[index]);
-
                   lista_Datos.add(lista[index]['id'].toString());
                   lista_Datos.add(lista[index]['username']);
                   lista_Datos.add(lista[index]['password']);
@@ -104,7 +103,7 @@ class _dueniosState extends State<duenios> {
                   lista_Datos.add(lista[index]['nombre']);
                   lista_Datos.add(lista[index]['apellidos']);
 
-                  print(lista_datos);
+                  // print(lista_datos);
                   late List ListaNavigador = [];
                   ListaNavigador.add(lista[index]['id'].toString());
                   ListaNavigador.add(lista[index]['rol']);
@@ -113,6 +112,34 @@ class _dueniosState extends State<duenios> {
                       arguments: ListaNavigador);
                 },
                 icon: const Icon(Icons.edit),
+              ),
+              IconButton(
+                onPressed: () {
+                  // String id_STR = lista_navigator.toString()[1];
+                  // int id_casteado = int.parse(lista_navigator.toString()[1]);
+
+                  // ignore: unnecessary_new
+                  Usuario user = new Usuario(
+                      id: lista[index]['id'],
+                      nombre: lista[index]['nombre'],
+                      apellidos: lista[index]['apellidos'],
+                      edad: lista[index]['edad'],
+                      rol: 'Cliente',
+                      username: lista[index]['username'],
+                      password: lista[index]['password']);
+
+                  local().getToken().then(
+                    (token) {
+                      deleteDuenio(user, token!).then(
+                        (value) {
+                          print(value);
+                          Navigator.pushReplacementNamed(context, 'duenios');
+                        },
+                      );
+                    },
+                  );
+                },
+                icon: const Icon(Icons.delete),
               ),
             ],
           ),

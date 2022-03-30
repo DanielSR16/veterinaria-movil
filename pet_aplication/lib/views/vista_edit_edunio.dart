@@ -100,6 +100,7 @@ class _edit_duenioState extends State<edit_duenio> {
                         int id_casteado =
                             int.parse(lista_navigator.toString()[1]);
 
+                        // ignore: unnecessary_new
                         Usuario user = new Usuario(
                             id: id_casteado,
                             nombre: nombre.text,
@@ -109,12 +110,17 @@ class _edit_duenioState extends State<edit_duenio> {
                             username: usuario_controller.text,
                             password: contrasenia.text);
                         print(user);
-                        local().getToken().then((token) {
-                          updateDuenio(user, token!).then((value) {
-                            print(value);
-                            Navigator.pushReplacementNamed(context, 'duenios');
-                          });
-                        });
+                        local().getToken().then(
+                          (token) {
+                            updateDuenio(user, token!).then(
+                              (value) {
+                                print(value);
+                                Navigator.pushReplacementNamed(
+                                    context, 'duenios');
+                              },
+                            );
+                          },
+                        );
                       },
                       child: const Text('Editar Usuario'),
                     ),

@@ -144,7 +144,13 @@ public class DuenioController {
     }
 
 
-
-
-
+    @PostMapping(value = "/user/delete")
+    public Boolean deleteUser(@RequestBody User usuario){
+        User d = userRepositorio.findById(usuario.getId());
+        if(d != null){
+            userRepositorio.delete(d);
+            return true;
+        }
+        return null;
+    }
 }
