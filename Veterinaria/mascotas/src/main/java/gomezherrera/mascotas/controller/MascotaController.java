@@ -85,7 +85,7 @@ public class MascotaController {
     public void addMascota(@RequestBody MascotaU mascota){
         mascotaRepository.save(mascota);
     }
-/*
+
 @PostMapping(value = "/mascota/update")
     public MascotaU updateMascota(@RequestBody MascotaU mascota){
         if(mascotaRepository.findByIdMascota(mascota.getIdMascota())!=null){
@@ -93,9 +93,9 @@ public class MascotaController {
         }
         return null;
     }
- */
 
-/*
+
+
 @PostMapping(value = "/mascota/delete")
     public Boolean deleteMascota(@RequestBody MascotaU mascota) {
         MascotaU m = mascotaRepository.findByIdMascota(mascota.getIdMascota());
@@ -105,6 +105,6 @@ public class MascotaController {
         }
         return null;
     }
- */
+
 
 }

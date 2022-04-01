@@ -14,11 +14,11 @@ public interface MascotaRepository extends CrudRepository<MascotaU, Integer> {
     List<MascotaU> findByIdMedicamento(int idMedicamento);
     List<MascotaU> findByTipo(String tipo);
     MascotaU findByIdCita(int idCita);
-     MascotaU findByIdMascota(int idMascota);
+
     List<MascotaU>findAllByNombre(String nombre);
      void delete(MascotaU mascota);
      */
-
-    MascotaU save(MascotaU mascota);
+    MascotaU findByIdMascota(int idMascota);
+    MascotaU save(MascotaU mascotau);
 
 }
