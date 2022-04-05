@@ -19,7 +19,7 @@ class Mascota {
   final int idDuenio;
   final String nombre;
   final String raza;
-  final int fechaIngreso;
+  final String fechaIngreso;
   final String razon;
 
   

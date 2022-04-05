@@ -4,14 +4,14 @@ import 'package:pet_aplication/providers/share.dart';
 import 'package:pet_aplication/services/loginService.dart';
 import 'package:pet_aplication/providers/mascotas_modelo.dart';
 
-class mascotas extends StatefulWidget {
-  const mascotas({Key? key}) : super(key: key);
+class Mascotas extends StatefulWidget {
+  const Mascotas({Key? key}) : super(key: key);
 
   @override
-  State<mascotas> createState() => _mascotasState();
+  State<Mascotas> createState() => _MascotasState();
 }
 
-class _mascotasState extends State<mascotas> {
+class _MascotasState extends State<Mascotas> {
   @override
   TextEditingController _textFieldController = TextEditingController();
   late List<String> lista_Datos = [];
@@ -37,7 +37,8 @@ class _mascotasState extends State<mascotas> {
         backgroundColor: Colors.green,
         title: const Text('Mascotas'),
       ),
-      body: tamLista > 0
+      body: 
+      tamLista > 0
           ? RefreshIndicator(
               child: listaDatos(tamLista, lista_datos, context),
               onRefresh: refreshList,
@@ -74,11 +75,11 @@ class _mascotasState extends State<mascotas> {
       lenghtLista,
       (index) => {
         "id": index,
-        "title": "Usuario: " + lista[index]['username'],
-        "subtitle": "Nombre: " +
-            lista[index]['nombre'] +
-            " | Apellido: " +
-            lista[index]['apellidos']
+        "title": "Nombre: " + lista[index]['nombre'],
+        "raza": "Raza: " +
+            lista[index]['raza'] +
+            " | Fecha de ingreso: " +
+            lista[index]['fechaIngreso']
       },
     );
     return ListView.builder(
@@ -90,27 +91,31 @@ class _mascotasState extends State<mascotas> {
             _items[index]['title'],
           ),
           subtitle: Text(
-            _items[index]['subtitle'],
+            _items[index]['raza'],
           ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(
                 onPressed: () {
-                  print(lista[index]);
-                  // lista_Datos.add(lista[index]['idMascota'].toString());
-                  // lista_Datos.add(lista[index]['nombre']);
-                  // lista_Datos.add(lista[index]['raza']);
-                  // lista_Datos.add(lista[index]['fechaIngreso']);
-                  // lista_Datos.add(lista[index]['razon']);
+                  // print('soy lista xd');
+                  lista_Datos.add(lista[index]['nombre']);
+                  lista_Datos.add(lista[index]['raza']);
+                  lista_Datos.add(lista[index]['fechaIngreso']);
+                  lista_Datos.add(lista[index]['razon']);
 
-                  // // print(lista_datos);
-                  // late List ListaNavigador = [];
-                  // ListaNavigador.add(lista[index]['id'].toString());
-                  // ListaNavigador.add(lista[index]['rol']);
-                  // local().setDuenio(lista_Datos);
-                  // Navigator.pushReplacementNamed(context, 'edit_duenios',
-                  //     arguments: ListaNavigador);
+                  // print(lista_Datos);
+                  List listaNavigador = [];
+                  listaNavigador.add(lista[index]['idDuenio']);
+                  listaNavigador.add(lista[index]['idMascota']);
+                  print('listas');
+                  // print(lista[index]['idMascota']);
+                  // print(lista[index]['idDuenio']);
+                  print(listaNavigador);
+                  
+                  local().setMascota(lista_Datos);
+                  Navigator.pushReplacementNamed(context, 'edit_mascota',
+                      arguments: listaNavigador);
                 },
                 icon: const Icon(Icons.edit),
               ),

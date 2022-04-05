@@ -71,7 +71,7 @@ class _edit_mascotaState extends State<edit_mascota> {
         leading: BackButton(
           color: Colors.black,
           onPressed: () {
-            Navigator.pushReplacementNamed(context, 'duenios');
+            Navigator.pushReplacementNamed(context, 'mascotas');
           },
         ),
       ),
@@ -98,33 +98,36 @@ class _edit_mascotaState extends State<edit_mascota> {
                         ),
                       ),
                       onPressed: () {
-                        // print(nombre.text + apellidos.text);
-                        // print(lista_navigator.toString()[0]);
-                        String id_STR = lista_navigator.toString()[1];
-                        int id_casteado =
-                            int.parse(lista_navigator.toString()[1]);
-                        // print(lista_navigator)
-                        // ignore: unnecessary_new
-                        // Mascota mascotau = new Mascota(
-                        //     idDuenio: idDuenio,
-                        //     idMascota: id_casteado,
-                        //     nombre: nombre.text,
-                        //     raza: raza.text,
-                        //     fechaIngreso: int.parse(fechaIngreso.text),
-                        //     razon: razon.text, idDuenio: null,);
-                        // print(mascotau);
-                        // local().getToken().then(
-                        //   (token) {
-                        //     //CAMBIAR EL UPDATE
-                        //     updateMascota(mascotau, token!).then(
-                        //       (value) {
-                        //         print(value);
-                        //         Navigator.pushReplacementNamed(
-                        //             context, 'duenios');
-                        //       },
-                        //     );
-                        //   },
-                        // );
+                        // print(lista_navigator.toString()[1]);
+                        // print(lista_navigator.toString()[4]);
+                      
+                        int id_casteado = int.parse(lista_navigator.toString()[1]);
+                       
+                        int id_casteado_Mascota = int.parse(lista_navigator.toString()[4]);
+                        
+                    
+                        Mascota mascotau = new Mascota(
+                            idDuenio: id_casteado,
+                            idMascota: id_casteado_Mascota,
+                            nombre: nombre.text,
+                            raza: raza.text,
+                            fechaIngreso: fechaIngreso.text,
+                            razon: razon.text, );
+
+                        print(mascotau);
+                        local().getToken().then(
+                          (token) {
+                            //CAMBIAR EL UPDATE
+                            updateMascota(mascotau, token!).then(
+                              (value) {
+                                print('aaaaaaaaaaaaaaaaa');
+                                print(value);
+                                Navigator.pushReplacementNamed(
+                                    context, 'mascotas');
+                              },
+                            );
+                          },
+                        );
                       },
                       child: const Text('Editar Usuario'),
                     ),
@@ -168,10 +171,10 @@ class _edit_mascotaState extends State<edit_mascota> {
         //CAMBIAR EL GET DUEÑO
         local().getMascota().then((lista) {
           print(lista);
-          nombre = new TextEditingController(text: lista![4]);
-          raza = new TextEditingController(text: lista[5]);
-          fechaIngreso = new TextEditingController(text: lista[3]);
-          razon = new TextEditingController(text: lista[1]);
+          nombre = new TextEditingController(text: lista![0]);
+          raza = new TextEditingController(text: lista[1]);
+          fechaIngreso = new TextEditingController(text: lista[2]);
+          razon = new TextEditingController(text: lista[3]);
         });
       },
     );
