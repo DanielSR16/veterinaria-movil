@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pet_aplication/views/citas.dart';
 import 'package:pet_aplication/views/duenios.dart';
+import 'package:pet_aplication/views/edit_citas.dart';
 import 'package:pet_aplication/views/home.dart';
 import 'package:pet_aplication/views/login.dart';
 import 'package:pet_aplication/views/vista_edit_edunio.dart';
@@ -30,8 +32,10 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        initialRoute: 'login',
+        initialRoute: 'citas',
         routes: {
+          'edit_citas': (_) => const edit_citas(),
+          'citas': (_) => const citas(),
           'login': (_) => const Login(),
           'home': (_) => Home(),
           'duenios': (_) => const duenios(),

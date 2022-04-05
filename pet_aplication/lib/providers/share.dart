@@ -20,4 +20,14 @@ class local {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getStringList('listaDuenio');
   }
+
+    Future<Future<bool>> setCitas(List<String> lista) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setStringList('listaCitas', lista);
+  }
+
+  Future<List<String>?> getCitas() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getStringList('listaCitas');
+  }
 }
