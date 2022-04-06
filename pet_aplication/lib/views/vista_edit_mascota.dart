@@ -34,7 +34,6 @@ class _edit_mascotaState extends State<edit_mascota> {
     raza.dispose();
     fechaIngreso.dispose();
     razon.dispose();
-   
 
     super.dispose();
   }
@@ -44,9 +43,7 @@ class _edit_mascotaState extends State<edit_mascota> {
     // TODO: implement initState
 
     super.initState();
-      //CHECAR DESPUES EL GET DUEÑO
-
-
+    //CHECAR DESPUES EL GET DUEÑO
 
     //CAMBIAR EL GETDUEÑO
     local().getMascota().then((lista) {
@@ -62,8 +59,7 @@ class _edit_mascotaState extends State<edit_mascota> {
     double height_total = MediaQuery.of(context).size.height;
     final Object? lista_navigator = ModalRoute.of(context)!.settings.arguments;
     iniciar = true;
-    print('object');
-    print(datos_mascota);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
@@ -78,14 +74,13 @@ class _edit_mascotaState extends State<edit_mascota> {
       body: iniciar == true
           ? RefreshIndicator(
               child: ListView(
-                padding: EdgeInsets.only(top: 10, left: 20, right: 20),
+                padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
                 children: [
                   input(width_total, height_total, 'Nombre', nombre),
                   input(width_total, height_total, 'Raza', raza),
-                  input(width_total, height_total, 'Fecha de ingreso', fechaIngreso),
-                  input(
-                      width_total, height_total, 'Razon de ingreso', razon),
-                  
+                  input(width_total, height_total, 'Fecha de ingreso',
+                      fechaIngreso),
+                  input(width_total, height_total, 'Razon de ingreso', razon),
                   Container(
                     margin: const EdgeInsets.only(top: 20),
                     // width: 300,
@@ -98,29 +93,29 @@ class _edit_mascotaState extends State<edit_mascota> {
                         ),
                       ),
                       onPressed: () {
-                        // print(lista_navigator.toString()[1]);
-                        // print(lista_navigator.toString()[4]);
-                      
-                        int id_casteado = int.parse(lista_navigator.toString()[1]);
-                       
-                        int id_casteado_Mascota = int.parse(lista_navigator.toString()[4]);
-                        
-                    
-                        Mascota mascotau = new Mascota(
-                            idDuenio: id_casteado,
-                            idMascota: id_casteado_Mascota,
-                            nombre: nombre.text,
-                            raza: raza.text,
-                            fechaIngreso: fechaIngreso.text,
-                            razon: razon.text, );
+                        List? lista = [];
+                        lista = lista_navigator as List?;
+                        int id_mascota = lista![1];
+                        int id_duenio = lista[0];
 
-                        print(mascotau);
+                        // int idCasteado = int.parse(lista![1]);
+
+                        // int idCasteadoMascota = int.parse(lista![0]);
+
+                        Mascota mascotau = Mascota(
+                          idDuenio: id_duenio,
+                          idMascota: id_mascota,
+                          nombre: nombre.text,
+                          raza: raza.text,
+                          fechaIngreso: fechaIngreso.text,
+                          razon: razon.text,
+                        );
+
                         local().getToken().then(
                           (token) {
                             //CAMBIAR EL UPDATE
                             updateMascota(mascotau, token!).then(
                               (value) {
-                                print('aaaaaaaaaaaaaaaaa');
                                 print(value);
                                 Navigator.pushReplacementNamed(
                                     context, 'mascotas');

@@ -19,13 +19,13 @@ public class SecurityFilter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http
-                    .antMatcher("/user/**")
+                    .antMatcher("/mascota/**")
                     .cors()
                     .and()
                     .csrf()
                     .disable() // we don't need CSRF because our token is invulnerable
                     .authorizeRequests()
-                    .antMatchers(HttpMethod.POST, "/user/**").permitAll()
+                    .antMatchers(HttpMethod.POST, "/mascota/**").permitAll()
 
                     .anyRequest().authenticated()
                     .and()
@@ -69,12 +69,12 @@ public class SecurityFilter {
 //
             http
 //
-                    .authorizeRequests().antMatchers("/listCita/**").authenticated()
+                    .authorizeRequests().antMatchers("/mascota/**").authenticated()
                     .and()
                     .authorizeRequests()
-                    .antMatchers("/cita/**")
+                    .antMatchers("/mascota/**")
                     .authenticated()
-                    .antMatchers(HttpMethod.POST,"/user/JSON").permitAll();
+                    .antMatchers(HttpMethod.POST,"/mascotaU/JSON").permitAll();
 
         }
 

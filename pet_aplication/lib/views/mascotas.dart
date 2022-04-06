@@ -37,8 +37,7 @@ class _MascotasState extends State<Mascotas> {
         backgroundColor: Colors.green,
         title: const Text('Mascotas'),
       ),
-      body: 
-      tamLista > 0
+      body: tamLista > 0
           ? RefreshIndicator(
               child: listaDatos(tamLista, lista_datos, context),
               onRefresh: refreshList,
@@ -98,21 +97,16 @@ class _MascotasState extends State<Mascotas> {
             children: [
               IconButton(
                 onPressed: () {
-                  // print('soy lista xd');
+           
                   lista_Datos.add(lista[index]['nombre']);
                   lista_Datos.add(lista[index]['raza']);
                   lista_Datos.add(lista[index]['fechaIngreso']);
                   lista_Datos.add(lista[index]['razon']);
 
-                  // print(lista_Datos);
                   List listaNavigador = [];
                   listaNavigador.add(lista[index]['idDuenio']);
                   listaNavigador.add(lista[index]['idMascota']);
-                  print('listas');
-                  // print(lista[index]['idMascota']);
-                  // print(lista[index]['idDuenio']);
-                  print(listaNavigador);
-                  
+           
                   local().setMascota(lista_Datos);
                   Navigator.pushReplacementNamed(context, 'edit_mascota',
                       arguments: listaNavigador);
@@ -121,25 +115,22 @@ class _MascotasState extends State<Mascotas> {
               ),
               IconButton(
                 onPressed: () {
-                  // String id_STR = lista_navigator.toString()[1];
-                  // int id_casteado = int.parse(lista_navigator.toString()[1]);
-
-                  // ignore: unnecessary_new
-                  Usuario user = new Usuario(
-                      id: lista[index]['id'],
-                      nombre: lista[index]['nombre'],
-                      apellidos: lista[index]['apellidos'],
-                      edad: lista[index]['edad'],
-                      rol: 'Cliente',
-                      username: lista[index]['username'],
-                      password: lista[index]['password']);
+   
+                  Mascota mascotau = Mascota(
+                    idDuenio: lista[index]['idDuenio'],
+                    idMascota: lista[index]['idMascota'],
+                    nombre: lista[index]['nombre'],
+                    raza: lista[index]['raza'],
+                    fechaIngreso: lista[index]['fechaIngreso'],
+                    razon: lista[index]['razon'],
+                  );
 
                   local().getToken().then(
                     (token) {
-                      deleteMascota(user, token!).then(
+                      deleteMascota(mascotau, token!).then(
                         (value) {
                           print(value);
-                          Navigator.pushReplacementNamed(context, 'duenios');
+                          Navigator.pushReplacementNamed(context, 'mascotas');
                         },
                       );
                     },
