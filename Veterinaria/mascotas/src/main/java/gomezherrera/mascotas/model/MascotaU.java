@@ -7,16 +7,16 @@ public class MascotaU {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idMascota;
 
+    @Column(name = "idDuenio")
+    private int idDuenio;
+
+
     @Column(name = "nombre")
     private String nombre;
 
     @Column(name = "raza")
     private String raza;
 
-
-
-    //@Column(name = "idDuenio")
-    //private int idDuenio;
 
     @Column(name = "fechaIngreso")
     private String fechaIngreso;
@@ -28,10 +28,11 @@ public class MascotaU {
 
     }
 
-    public MascotaU(int idMascota, String nombre, String raza,String fechaIngreso, String razon) {
+    public MascotaU(int idMascota, String nombre, String raza, int idDuenio, String fechaIngreso, String razon) {
         this.idMascota = idMascota;
         this.nombre = nombre;
         this.raza = raza;
+        this.idDuenio = idDuenio;
         this.fechaIngreso = fechaIngreso;
         this.razon = razon;
     }
@@ -58,6 +59,14 @@ public class MascotaU {
 
     public void setRaza(String raza) {
         this.raza = raza;
+    }
+
+    public int getIdDuenio() {
+        return idDuenio;
+    }
+
+    public void setIdDuenio(int idDuenio) {
+        this.idDuenio = idDuenio;
     }
 
     public String getFechaIngreso() {

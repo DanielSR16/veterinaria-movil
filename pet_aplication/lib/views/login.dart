@@ -117,7 +117,7 @@ class _LoginState extends State<Login> {
                             // provider.saveData(
                             //     token: value[1], idUser: value[0]);
                             local().setToken(value[1]);
-                            Navigator.pushReplacementNamed(context, 'duenios');
+                            Navigator.pushReplacementNamed(context, 'mascotas');
                           } else {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
