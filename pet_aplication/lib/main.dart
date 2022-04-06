@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pet_aplication/views/citas.dart';
 import 'package:pet_aplication/views/duenios.dart';
+import 'package:pet_aplication/views/edit_citas.dart';
 import 'package:pet_aplication/views/home.dart';
 import 'package:pet_aplication/views/login.dart';
 import 'package:pet_aplication/views/mascotas.dart';
@@ -34,6 +36,8 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: 'login',
         routes: {
+          'edit_citas': (_) => const edit_citas(),
+          'citas': (_) => const citas(),
           'login': (_) => const Login(),
           'home': (_) => Home(),
           'duenios': (_) => const duenios(),

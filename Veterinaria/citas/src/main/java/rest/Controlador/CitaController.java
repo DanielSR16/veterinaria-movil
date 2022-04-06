@@ -107,10 +107,13 @@ public class CitaController {
         return null;
     }
 
-    @PostMapping(value = "/cita/delete")
+    @PostMapping(value = "/cita/deletes")
     public Boolean deleteCita(@RequestBody Cita cita){
+
         Cita d = citaRepository.findByIdCita(cita.getIdCita());
+        System.out.println("jajaja");
         if(d != null){
+
             citaRepository.delete(d);
             return true;
         }

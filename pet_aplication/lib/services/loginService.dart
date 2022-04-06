@@ -5,8 +5,9 @@ import 'package:http/http.dart' as http;
 import 'package:pet_aplication/providers/duenios_modelo.dart';
 import 'package:pet_aplication/providers/mascotas_modelo.dart';
 import 'package:pet_aplication/providers/loginProvider.dart';
+import 'package:pet_aplication/providers/modelo_citas.dart';
 
-String ip = '192.168.1.74';
+String ip = '192.168.0.90';
 Future<List<dynamic>> login(String usuario, String password) async {
   try {
     final response = await http.post(Uri.http(ip + ':18080', '/user/login'),
