@@ -48,10 +48,7 @@ public class DuenioController {
     public List<Duenio> getDuenioByDireccion(@RequestBody Duenio duenio){
         return duenioRepository.findDuenioByDireccion(duenio.getDireccion());
     }
-    @GetMapping(value="/duenio/{idDuenio}")
-    public Duenio getDuenio(@PathVariable("idDuenio") int idDuenio){
-        return duenioRepository.findById(idDuenio);
-    }
+
 
     @PostMapping(value = "/duenio/telefono")
     public List<Duenio> getDuenioByCountry(@RequestBody Duenio duenio){
@@ -152,5 +149,10 @@ public class DuenioController {
             return true;
         }
         return null;
+    }
+
+    @GetMapping(value="/user/{id}")
+    public User getDuenio(@PathVariable("id") int id){
+        return userRepositorio.findById(id);
     }
 }

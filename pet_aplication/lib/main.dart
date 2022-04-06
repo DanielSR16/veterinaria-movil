@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_aplication/views/citas.dart';
+import 'package:pet_aplication/views/empleado_view.dart';
 import 'package:pet_aplication/views/duenios.dart';
 import 'package:pet_aplication/views/edit_citas.dart';
 import 'package:pet_aplication/views/home.dart';
@@ -42,8 +43,9 @@ class MyApp extends StatelessWidget {
           'home': (_) => Home(),
           'duenios': (_) => const duenios(),
           'edit_duenios': (_) => const edit_duenio(),
-          'mascotas' : (_) =>  const Mascotas(),
-          'edit_mascota' : (_) => const edit_mascota(),
+          'mascotas': (_) => const Mascotas(),
+          'edit_mascota': (_) => const edit_mascota(),
+          'vista_empleado': (_) => const empleadoView(),
         },
       ),
     );

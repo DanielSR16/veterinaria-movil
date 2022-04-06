@@ -18,7 +18,7 @@ public interface MascotaRepository extends CrudRepository<MascotaU, Integer> {
 //    List<MascotaU>findAllByNombre(String nombre);
 
     void delete(MascotaU mascota);
-
+    List<MascotaU> findByIdDuenio(int idDuenio);
     MascotaU findByIdMascota(int idMascota);
     MascotaU save(MascotaU mascotau);
 

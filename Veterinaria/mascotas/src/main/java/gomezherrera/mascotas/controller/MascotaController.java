@@ -58,5 +58,10 @@ public class MascotaController {
             return null;
         }
 
+    @GetMapping(value = "/mascota/{idDuenio}")
+    public List<MascotaU> getMascotaByIdDuenio(@PathVariable("idDuenio") int idDuenio){
+        return mascotaRepository.findByIdDuenio(idDuenio);
+    }
+
 
 }

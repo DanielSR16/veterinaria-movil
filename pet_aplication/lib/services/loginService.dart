@@ -7,7 +7,7 @@ import 'package:pet_aplication/providers/mascotas_modelo.dart';
 import 'package:pet_aplication/providers/loginProvider.dart';
 import 'package:pet_aplication/providers/modelo_citas.dart';
 
-String ip = '192.168.0.90';
+String ip = '192.168.1.74';
 Future<List<dynamic>> login(String usuario, String password) async {
   try {
     final response = await http.post(Uri.http(ip + ':18080', '/user/login'),
@@ -122,6 +122,28 @@ Future<List<dynamic>> deleteDuenio(Usuario usuario, String token) async {
   }
 }
 
+Future duenioByID(String token, int id) async {
+  var resultado;
+  String id_to = id.toString();
+  print(LoginProvider().jwt);
+  print('object');
+  try {
+    final response =
+        await http.get(Uri.http(ip + ':18080', '/user/' + id_to), headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      HttpHeaders.authorizationHeader: token
+    });
+
+    // body: json.encode({"username": usuario, "password": password}));
+    resultado = json.decode(response.body);
+
+    // print(resultado);
+    return resultado;
+  } catch (e) {
+    return ['Error en la respuesta'];
+  }
+}
+
 Future<List<dynamic>> get_mascotas_all(String token) async {
   var resultado;
   print(LoginProvider().jwt);
@@ -160,8 +182,6 @@ Future<List<dynamic>> updateMascota(Mascota mascota, String token) async {
       }),
     );
 
-    // print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-    // print(mascota);
     print(response.statusCode);
     if (response.statusCode == 200) {
       print('entre al 200');
@@ -296,6 +316,25 @@ Future<List<dynamic>> deleteCitas(Citas citas, String token) async {
     } else {
       return ['No se ha podido conectar al servidor'];
     }
+  } catch (e) {
+    return ['Error en la respuesta'];
+  }
+}
+
+Future<List<dynamic>> get_mascotas_id(String token, int id) async {
+  var resultado;
+
+  try {
+    final response = await http
+        .get(Uri.http(ip + ':9998', '/mascota/' + id.toString()), headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      HttpHeaders.authorizationHeader: token
+    });
+
+    // body: json.encode({"username": usuario, "password": password}));
+    resultado = json.decode(response.body);
+    print(resultado);
+    return resultado;
   } catch (e) {
     return ['Error en la respuesta'];
   }

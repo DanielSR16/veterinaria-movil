@@ -37,14 +37,27 @@ class _citasState extends State<citas> {
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: const Text('Citas'),
+        leading: BackButton(
+          color: Colors.black,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: tamLista > 0
           ? RefreshIndicator(
               child: listaDatos(tamLista, lista_datos, context),
               onRefresh: refreshList,
             )
-          : const Center(
-              child: CircularProgressIndicator(),
+          : Column(
+              children: const [
+                Center(
+                  child: Text('Cargando'),
+                ),
+                Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ],
             ),
     );
   }

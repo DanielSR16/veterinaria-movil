@@ -35,6 +35,12 @@ class _dueniosState extends State<duenios> {
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: const Text('Dueños'),
+        leading: BackButton(
+          color: Colors.black,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: tamLista > 0
           ? RefreshIndicator(

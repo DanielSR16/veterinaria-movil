@@ -20,13 +20,18 @@ class _MascotasState extends State<Mascotas> {
   List lista_datos = [];
   void initState() {
     super.initState();
-    local().getToken().then((token) => {
-          get_mascotas_all(token!).then((lista) {
-            // listaDatos(value.length, value);
-            tamLista = lista.length;
-            lista_datos = lista;
-          }),
-        });
+    local().getToken().then(
+          (token) => {
+            local().getIdDuenio().then((id) {
+              get_mascotas_id(token!, id).then(
+                (lista) {
+                  tamLista = lista.length;
+                  lista_datos = lista;
+                },
+              );
+            })
+          },
+        );
     refreshList();
   }
 
@@ -36,6 +41,15 @@ class _MascotasState extends State<Mascotas> {
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: const Text('Mascotas'),
+        leading: BackButton(
+          color: Colors.black,
+          onPressed: () {
+            Navigator.pushReplacementNamed(
+              context,
+              'login',
+            );
+          },
+        ),
       ),
       body: tamLista > 0
           ? RefreshIndicator(
@@ -55,12 +69,14 @@ class _MascotasState extends State<Mascotas> {
       () {
         local().getToken().then(
               (token) => {
-                get_mascotas_all(token!).then(
-                  (lista) {
-                    tamLista = lista.length;
-                    lista_datos = lista;
-                  },
-                ),
+                local().getIdDuenio().then((id) {
+                  get_mascotas_id(token!, id).then(
+                    (lista) {
+                      tamLista = lista.length;
+                      lista_datos = lista;
+                    },
+                  );
+                })
               },
             );
       },
@@ -97,7 +113,6 @@ class _MascotasState extends State<Mascotas> {
             children: [
               IconButton(
                 onPressed: () {
-           
                   lista_Datos.add(lista[index]['nombre']);
                   lista_Datos.add(lista[index]['raza']);
                   lista_Datos.add(lista[index]['fechaIngreso']);
@@ -106,7 +121,7 @@ class _MascotasState extends State<Mascotas> {
                   List listaNavigador = [];
                   listaNavigador.add(lista[index]['idDuenio']);
                   listaNavigador.add(lista[index]['idMascota']);
-           
+
                   local().setMascota(lista_Datos);
                   Navigator.pushReplacementNamed(context, 'edit_mascota',
                       arguments: listaNavigador);
@@ -115,7 +130,6 @@ class _MascotasState extends State<Mascotas> {
               ),
               IconButton(
                 onPressed: () {
-   
                   Mascota mascotau = Mascota(
                     idDuenio: lista[index]['idDuenio'],
                     idMascota: lista[index]['idMascota'],

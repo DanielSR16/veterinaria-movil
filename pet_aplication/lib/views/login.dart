@@ -13,7 +13,6 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   bool _isObscure = true;
   String? user = '';
@@ -117,7 +116,23 @@ class _LoginState extends State<Login> {
                             // provider.saveData(
                             //     token: value[1], idUser: value[0]);
                             local().setToken(value[1]);
-                            Navigator.pushReplacementNamed(context, 'mascotas');
+                            // int id_casteado = int.parse(value[0]);
+
+                            local().setIdDuenio(value[0]);
+                            duenioByID(value[1], value[0]).then((value) {
+                              print(value['rol']);
+                              String rol = value['rol'];
+                              if (rol == 'Cliente') {
+                                Navigator.pushReplacementNamed(
+                                  context,
+                                  'mascotas',
+                                );
+                              } else {
+                                Navigator.pushReplacementNamed(
+                                    context, 'vista_empleado',
+                                    arguments: value['nombre']);
+                              }
+                            });
                           } else {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
