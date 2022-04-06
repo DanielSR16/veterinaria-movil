@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        initialRoute: 'citas',
+        initialRoute: 'login',
         routes: {
           'edit_citas': (_) => const edit_citas(),
           'citas': (_) => const citas(),

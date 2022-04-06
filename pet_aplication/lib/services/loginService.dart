@@ -6,10 +6,10 @@ import 'package:pet_aplication/providers/duenios_modelo.dart';
 import 'package:pet_aplication/providers/loginProvider.dart';
 import 'package:pet_aplication/providers/modelo_citas.dart';
 
+String ip = '192.168.0.90';
 Future<List<dynamic>> login(String usuario, String password) async {
   try {
-    final response = await http.post(
-        Uri.http('192.168.1.72:18080', '/user/login'),
+    final response = await http.post(Uri.http(ip + ':18080', '/user/login'),
         headers: {'Content-Type': 'application/json; charset=UTF-8'},
         body: json.encode({"username": usuario, "password": password}));
 
@@ -34,8 +34,8 @@ Future<List<dynamic>> get_duenios_all(String token) async {
   print(LoginProvider().jwt);
   print('object');
   try {
-    final response = await http
-        .get(Uri.http('192.168.1.72:18080', '/user/listUser'), headers: {
+    final response =
+        await http.get(Uri.http(ip + ':18080', '/user/listUser'), headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       HttpHeaders.authorizationHeader: token
     });
@@ -52,7 +52,7 @@ Future<List<dynamic>> get_duenios_all(String token) async {
 Future<List<dynamic>> updateDuenio(Usuario usuario, String token) async {
   try {
     final response = await http.post(
-      Uri.http('192.168.1.72:18080', '/user/update'),
+      Uri.http(ip + ':18080', '/user/update'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         HttpHeaders.authorizationHeader: token
@@ -87,7 +87,7 @@ Future<List<dynamic>> updateDuenio(Usuario usuario, String token) async {
 Future<List<dynamic>> deleteDuenio(Usuario usuario, String token) async {
   try {
     final response = await http.post(
-      Uri.http('192.168.1.72:18080', '/user/delete'),
+      Uri.http(ip + ':18080', '/user/delete'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         HttpHeaders.authorizationHeader: token
@@ -128,8 +128,8 @@ Future<List<dynamic>> get_citas_all(String token) async {
   print(LoginProvider().jwt);
   print('object');
   try {
-    final response = await http
-        .get(Uri.http('192.168.1.72:9999', '/listCita'), headers: {
+    final response =
+        await http.get(Uri.http(ip + ':9999', '/listCita'), headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       HttpHeaders.authorizationHeader: token
     });
@@ -146,16 +146,16 @@ Future<List<dynamic>> get_citas_all(String token) async {
 Future<List<dynamic>> updateCitas(Citas citas, String token) async {
   try {
     final response = await http.post(
-      Uri.http('192.168.1.72:9999', '/cita/update'),
+      Uri.http(ip + ':9999', '/cita/update'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         HttpHeaders.authorizationHeader: token
       },
       body: json.encode({
-          "idCita": citas.idCita,
-          "fecha": citas.fecha,
-          "hora": citas.hora,
-          "tipoServicio": citas.tipoServicio,
+        "idCita": citas.idCita,
+        "fecha": citas.fecha,
+        "hora": citas.hora,
+        "tipoServicio": citas.tipoServicio,
       }),
     );
 
@@ -178,7 +178,7 @@ Future<List<dynamic>> updateCitas(Citas citas, String token) async {
 Future<List<dynamic>> deleteCitas(Citas citas, String token) async {
   try {
     final response = await http.post(
-      Uri.http('192.168.1.72:9999', '/citas/delete'),
+      Uri.http(ip + ':9999', '/cita/deletes'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         HttpHeaders.authorizationHeader: token
@@ -195,6 +195,7 @@ Future<List<dynamic>> deleteCitas(Citas citas, String token) async {
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
+      print('a');
       print(data);
       if (data == null) {
         return [];

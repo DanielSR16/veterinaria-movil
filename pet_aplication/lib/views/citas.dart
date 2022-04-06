@@ -28,7 +28,6 @@ class _citasState extends State<citas> {
           }),
         });
 
-    
     refreshList();
   }
 
@@ -39,8 +38,7 @@ class _citasState extends State<citas> {
         backgroundColor: Colors.green,
         title: const Text('Citas'),
       ),
-      body: 
-      tamLista > 0
+      body: tamLista > 0
           ? RefreshIndicator(
               child: listaDatos(tamLista, lista_datos, context),
               onRefresh: refreshList,
@@ -122,10 +120,11 @@ class _citasState extends State<citas> {
 
                   // ignore: unnecessary_new
                   Citas citas = new Citas(
-                      idCita: lista[index]['idCita'],
-                      fecha: lista[index]['fecha'],
-                      hora: lista[index]['hora'],
-                      tipoServicio: lista[index]['tipoServicio'],);
+                    idCita: lista[index]['idCita'],
+                    fecha: lista[index]['fecha'],
+                    hora: lista[index]['hora'],
+                    tipoServicio: lista[index]['tipoServicio'],
+                  );
 
                   local().getToken().then(
                     (token) {
